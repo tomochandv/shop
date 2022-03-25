@@ -1,0 +1,32 @@
+﻿
+서비스 상태
+sudo systemctl status shop_admin_api.service
+우분투 서비스 등록
+sudo systemctl enable shop_admin_api.service
+서비스 시작
+sudo systemctl start shop_admin_api.service
+서비스 종료
+sudo systemctl stop shop_admin_api.service
+서비스 삭제
+sudo systemctl disable shop_admin_api.service
+
+서비스 파일
+
+[Unit]
+Description=Shop Admin Api
+
+[Service]
+WorkingDirectory=/home/king/shop_admin_api
+ExecStart=dotnet /home/king/shop_admin_api/shop_admin_api.dll
+Restart=always
+# Restart service after 10 seconds if the dotnet service crashes:
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=shop-admin-api
+#User=user
+Environment=ASPNETCORE_ENVIRONMENT=Staging
+Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=true
+Environment=SERVER_TYPE=Platform_Test_Server
+
+[Install]
+WantedBy=multi-user.target
